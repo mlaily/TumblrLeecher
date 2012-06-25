@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="TumblrLeecher.Api.BlogInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAgAEAABAAAIAQAAAAAQAAASAAAAAAAAAA=</HashCode>
+      <FileName>Api\Blog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.AnswerPost">
+    <Position X="5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAIAAAQAAAAAAEAAAAAgAAAAA=</HashCode>
+      <FileName>Api\Post\AnswerPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.AudioPost">
+    <Position X="7.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABBAAAAAQAAgAAAAAgAoAAAAAACAAACQAAAAA=</HashCode>
+      <FileName>Api\Post\AudioPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.ChatPost">
+    <Position X="11.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAwAAAAEAAAgABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\ChatPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.Dialogue" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAUAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\ChatPost.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.LinkPost">
+    <Position X="9.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAEAAAgAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\LinkPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.PhotoPost">
+    <Position X="14" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAACAAAgAAAEAAAAAACAAACAAEAAAAAAA=</HashCode>
+      <FileName>Api\Post\PhotoPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.Photo" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAgAAAAAAAAAAAAAAAAgAAACCAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\PhotoPost.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.PhotoSize" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAABAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\PhotoPost.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.Post">
+    <Position X="8" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="TumblrLeecher.Api.Post.Types" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Api\Post\Post.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="TumblrLeecher.Api.Post.Formats" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Api\Post\Post.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAgiAQAAAAAAAAAAAgACAAAIAAgMAEiBAQAAAAQAIAA=</HashCode>
+      <FileName>Api\Post\Post.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.QuotePost">
+    <Position X="16.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Api\Post\QuotePost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.TextPost">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAgABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\TextPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.VideoPost">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAQAAAAAAgAAgAAAAAAAACAACAIAAQAQAAA=</HashCode>
+      <FileName>Api\Post\VideoPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.Player" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\VideoPost.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.PostCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAoAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\PostCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TumblrLeecher.Api.Response&lt;T&gt;" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgAAAAAgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Api\Response.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.Tumblr" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAQAgAAAAAAAAEACIAAAQAAIAAA=</HashCode>
+      <FileName>Api\Tumblr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TumblrLeecher.Api.Utility" Collapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Api\Utility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="TumblrLeecher.Api.ITumblrParsable" Collapsed="true">
+    <Position X="18.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\ITumblrParsable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TumblrLeecher.Api.Types" Collapsed="true">
+    <Position X="30.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAEAAAAAgAAAAAgAAAAASgEAAAg=</HashCode>
+      <FileName>Api\Post\EnumDefinitions.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TumblrLeecher.Api.Formats" Collapsed="true">
+    <Position X="30.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Api\Post\EnumDefinitions.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

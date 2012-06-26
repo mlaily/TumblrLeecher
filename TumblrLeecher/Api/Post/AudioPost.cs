@@ -27,6 +27,17 @@ namespace TumblrLeecher.Api
 		public int TrackNumber { get; protected set; }
 		public int Year { get; protected set; }
 
+		/// <summary>
+		/// undocumented
+		/// </summary>
+		public string AudioUrl { get; set; }
+
+		/// <summary>
+		/// undocumented
+		/// ex: "track":"7 of 11"
+		/// </summary>
+		public string Track { get; set; }
+
 		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
 		{
 			switch (currentPropertyName)
@@ -57,6 +68,12 @@ namespace TumblrLeecher.Api
 					break;
 				case "year":
 					this.Year = reader.ReadAsInt32().Value;
+					break;
+				case "audio_url":
+					this.AudioUrl = reader.ReadAsString();
+					break;
+				case "track":
+					this.Track = reader.ReadAsString();
 					break;
 				default:
 					return false;

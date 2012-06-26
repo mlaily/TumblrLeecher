@@ -13,7 +13,7 @@ namespace TumblrLeecher
 	{
 		static void Main(string[] args)
 		{
-			Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "beautyeternal.tumblr.com");
+			Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "surrogate-self.com");
 
 
 			//var photoPost = ((Api.PhotoPost)tumblr.RequestPosts(Api.Post.Types.Photo).Content[0]);
@@ -44,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("beautyeternal.tumblr.com", @"C:\beautyeternal\");
+			BackupEverything("surrogate-self.com", @"C:\surrogate-self.com\");
 		}
 
 		/// <summary>
@@ -96,14 +96,7 @@ namespace TumblrLeecher
 					{
 						responseString = sr.ReadToEnd();
 					}
-					if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Forbidden)
-					{
-						throw;
-					}
-					else
-					{
-						throw;
-					}
+					throw new Exception(((HttpWebResponse)ex.Response).StatusCode.ToString());
 				}
 			}
 			catch (Exception)
@@ -178,9 +171,12 @@ namespace TumblrLeecher
 						break;
 					case TumblrLeecher.Api.Post.Types.Video:
 						var videoPost = post as Api.VideoPost;
-						localPath = Download(videoPost.ThumbnailUrl, folderPath);
 						dynamic videoPostDynamic = CloneObject(videoPost);
-						videoPostDynamic.ThumbnailLocalPath = localPath;
+						if (videoPost.ThumbnailUrl != null)
+						{
+							localPath = Download(videoPost.ThumbnailUrl, folderPath);
+							videoPostDynamic.ThumbnailLocalPath = localPath;
+						}
 						allDynamic.Add(videoPostDynamic);
 						//todo: download actual video?
 						break;

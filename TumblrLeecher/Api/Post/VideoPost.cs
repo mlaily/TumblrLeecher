@@ -22,15 +22,20 @@ namespace TumblrLeecher.Api
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public int ThumbnailWidth { get; protected set; }
+		public decimal ThumbnailWidth { get; protected set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public int ThumbnailHeight { get; protected set; }
+		public decimal ThumbnailHeight { get; protected set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
 		public bool Html5Capable { get; protected set; }
+
+		/// <summary>
+		/// undocumented
+		/// </summary>
+		public string VideoUrl { get; set; }
 
 		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
 		{
@@ -49,13 +54,16 @@ namespace TumblrLeecher.Api
 					this.ThumbnailUrl = reader.ReadAsString();
 					break;
 				case "thumbnail_width":
-					this.ThumbnailWidth = reader.ReadAsInt32().Value;
+					this.ThumbnailWidth = reader.ReadAsDecimal().Value;
 					break;
 				case "thumbnail_height":
-					this.ThumbnailHeight = reader.ReadAsInt32().Value;
+					this.ThumbnailHeight = reader.ReadAsDecimal().Value;
 					break;
 				case "html5_capable":
 					this.Html5Capable = bool.Parse(reader.ReadAsString());
+					break;
+				case "video_url":
+					this.VideoUrl = reader.ReadAsString();
 					break;
 				default:
 					return false;

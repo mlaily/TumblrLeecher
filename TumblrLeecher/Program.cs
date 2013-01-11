@@ -13,7 +13,7 @@ namespace TumblrLeecher
 	{
 		static void Main(string[] args)
 		{
-			Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "surrogate-self.com");
+			//Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "mrdiv.tumblr.com");
 
 
 			//var photoPost = ((Api.PhotoPost)tumblr.RequestPosts(Api.Post.Types.Photo).Content[0]);
@@ -44,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("surrogate-self.com", @"C:\surrogate-self.com\");
+			BackupEverything("noirlac.tumblr.com", @"D:\noirlac.tumblr.com\");
 		}
 
 		/// <summary>
@@ -96,6 +96,9 @@ namespace TumblrLeecher
 					{
 						responseString = sr.ReadToEnd();
 					}
+					//debug
+					return string.Format("ERROR: {0}", ((HttpWebResponse)ex.Response).StatusCode.ToString());
+					//debug
 					throw new Exception(((HttpWebResponse)ex.Response).StatusCode.ToString());
 				}
 			}
@@ -103,7 +106,7 @@ namespace TumblrLeecher
 			{
 				throw;
 			}
-			
+
 			string localPath = System.IO.Path.Combine(basePath, response.ResponseUri.Segments.Last());
 			if (System.IO.File.Exists(localPath))
 			{
@@ -211,7 +214,7 @@ namespace TumblrLeecher
 										continue;
 									}
 								}
-								
+
 							}
 							photoDynamic.OriginalSize.LocalPath = localPath;
 							//todo: remove useless entries (keep larger size only)
@@ -235,7 +238,7 @@ namespace TumblrLeecher
 				}
 			}
 
-			using (var tw = new System.IO.StreamWriter(@"C:\serialized.txt"))
+			using (var tw = new System.IO.StreamWriter(System.IO.Path.Combine(folderPath, "serialized.txt")))
 			{
 				var anon = new { Posts = allDynamic, Blog = all.Blog, TotalPosts = all.TotalPosts };
 				Newtonsoft.Json.JsonSerializer.Create(new Newtonsoft.Json.JsonSerializerSettings() { Formatting = Newtonsoft.Json.Formatting.Indented }).Serialize(tw, anon);

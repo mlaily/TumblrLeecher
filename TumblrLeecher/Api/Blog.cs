@@ -37,6 +37,11 @@ namespace TumblrLeecher.Api
 
 		public int Likes { get; protected set; }
 
+		/// <summary>
+		/// http://developers.tumblr.com/post/35360559145/changelog-for-the-week-of-11-09-12
+		/// </summary>
+		public bool ShareLikes { get; protected set; }
+
 		public bool Parse(JsonReader reader)
 		{
 			reader.Read();//startObject
@@ -73,6 +78,9 @@ namespace TumblrLeecher.Api
 						break;
 					case "likes":
 						this.Likes = reader.ReadAsInt32().Value;
+						break;
+					case "share_likes":
+						this.ShareLikes = bool.Parse(reader.ReadAsString());
 						break;
 					default:
 						throw new Exception();

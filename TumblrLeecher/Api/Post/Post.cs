@@ -42,6 +42,10 @@ namespace TumblrLeecher.Api
 		/// </summary>
 		public bool Bookmarklet { get; protected set; }
 
+		public States State { get; protected set; }
+
+		public string ShortUrl { get; protected set; }
+
 		/// <summary>
 		/// when implemented, should switch on the currentPropertyName and read and initialize own properties accordingly.
 		/// should return true if datas have been read, false otherwise.
@@ -99,6 +103,12 @@ namespace TumblrLeecher.Api
 						break;
 					case "note_count":
 						this.NoteCount = reader.ReadAsInt32().Value;
+						break;
+					case "state":
+						this.State = (States)Enum.Parse(typeof(States), reader.ReadAsString(), true);
+						break;
+					case "short_url":
+						this.ShortUrl = reader.ReadAsString();
 						break;
 					default:
 						//call the implementation from derived class
@@ -220,6 +230,14 @@ namespace TumblrLeecher.Api
 		{
 			Html,
 			Markdown,
+		}
+
+		public enum States
+		{
+			Published,
+			Queued,
+			Draft,
+			Private,
 		}
 	}
 }

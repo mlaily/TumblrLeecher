@@ -24,6 +24,7 @@ namespace TumblrLeecher.Api
 		public string ReblogKey { get; protected set; }
 		public List<string> Tags { get; protected set; }
 		public List<string> Highlighted { get; protected set; }
+		public List<string> FeaturedInTag { get; protected set; }
 		public int NoteCount { get; protected set; }
 		/// <summary>
 		/// The URL for the source of the content (for quotes, reblogs, etc.)
@@ -87,6 +88,14 @@ namespace TumblrLeecher.Api
 						while (reader.Read() && reader.TokenType != JsonToken.EndArray)
 						{
 							this.Highlighted.Add(reader.Value.ToString());
+						}
+						break;
+					case "featured_in_tag":
+						this.FeaturedInTag = new List<string>();
+						reader.Read();//startArray
+						while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+						{
+							this.FeaturedInTag.Add(reader.Value.ToString());
 						}
 						break;
 					case "bookmarklet":

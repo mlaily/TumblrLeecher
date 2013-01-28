@@ -40,6 +40,8 @@ namespace TumblrLeecher.Api
 		/// </summary>
 		public List<string> FeaturedInTag { get; set; }
 
+		public string ImagePermalink { get; set; }
+
 		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
 		{
 			switch (currentPropertyName)
@@ -61,6 +63,9 @@ namespace TumblrLeecher.Api
 					break;
 				case "photoset_layout":
 					this.PhotoSetLayout = reader.ReadAsString();
+					break;
+				case "image_permalink":
+					this.ImagePermalink = reader.ReadAsString();
 					break;
 				case "featured_in_tag":
 					this.FeaturedInTag = new List<string>();

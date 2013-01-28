@@ -44,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("poodforn.tumblr.com", @"D:\poodforn.tumblr.com\");
+			BackupEverything("russian-criminal-tattoos.tumblr.com", @"D:\russian-criminal-tattoos.tumblr.com\");
 		}
 
 		/// <summary>
@@ -66,46 +66,73 @@ namespace TumblrLeecher
 			return d;
 		}
 
-		public static string Download(string url, string basePath, System.IO.FileMode openMode = System.IO.FileMode.Create, int timeout = 10000)
+		private static System.Net.WebResponse Download(string url, int timeout)
 		{
 			System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(url);
 			request.Timeout = timeout;
 			request.ReadWriteTimeout = timeout;
-			System.Net.WebResponse response;
-			int counter = 0;
-			int sleepTime = 1000;
-		getResponse:
-			counter++;
 			try
 			{
-				response = request.GetResponse();
+				return request.GetResponse();
 			}
 			catch (WebException ex)
 			{
 				if (ex.Status == WebExceptionStatus.Timeout)
 				{
-					System.Threading.Thread.Sleep(sleepTime);
-					sleepTime *= 2;
 					request.Abort();
-					goto getResponse;//uglyyyyyy
+					throw;
 				}
 				else
 				{
+					//debug
 					string responseString;
 					using (var sr = new System.IO.StreamReader(ex.Response.GetResponseStream()))
 					{
 						responseString = sr.ReadToEnd();
 					}
-					//debug
-					return string.Format("ERROR: {0}", ((HttpWebResponse)ex.Response).StatusCode.ToString());
-					//debug
-					throw new Exception(((HttpWebResponse)ex.Response).StatusCode.ToString());
+					ex.Response.Close();
+					throw new WebException(string.Format("ERROR: {0}", ((HttpWebResponse)ex.Response).StatusCode.ToString()), ex);
 				}
 			}
 			catch (Exception)
 			{
+				request.Abort();
 				throw;
 			}
+		}
+
+		public static string Download(string url, string basePath, System.IO.FileMode openMode = System.IO.FileMode.Create, int timeout = 10000)
+		{
+			int counter = 0;
+			int sleepTime = 1000;
+			System.Net.WebResponse response = null;
+			bool error;
+			do
+			{
+				error = false;
+				counter++;
+				try
+				{
+					response = Download(url, timeout);
+				}
+				catch (WebException ex)
+				{
+					error = true;
+					if (ex.Status == WebExceptionStatus.Timeout)
+					{
+						System.Threading.Thread.Sleep(sleepTime);
+						sleepTime *= 2;
+					}
+					else
+					{
+						return ex.Message;
+					}
+				}
+				catch (Exception)
+				{
+					error = true;
+				}
+			} while (error && counter < 10);
 
 			string localPath = System.IO.Path.Combine(basePath, response.ResponseUri.Segments.Last());
 			if (System.IO.File.Exists(localPath))
@@ -119,12 +146,14 @@ namespace TumblrLeecher
 			byte[] buffer = new byte[1024];
 			int read = 0;
 			using (var fs = new System.IO.FileStream(localPath, openMode))
+			using (var stream = response.GetResponseStream())
 			{
-				while ((read = response.GetResponseStream().Read(buffer, 0, buffer.Length)) > 0)
+				while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
 				{
 					fs.Write(buffer, 0, read);
 				}
 			}
+			response.Close();
 			return localPath;
 		}
 

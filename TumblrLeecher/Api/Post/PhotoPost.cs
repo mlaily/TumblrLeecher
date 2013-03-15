@@ -35,11 +35,6 @@ namespace TumblrLeecher.Api
 		/// </summary>
 		public string LinkUrl { get; protected set; }
 
-		/// <summary>
-		/// undocumented
-		/// </summary>
-		public List<string> FeaturedInTag { get; set; }
-
 		public string ImagePermalink { get; set; }
 
 		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
@@ -66,14 +61,6 @@ namespace TumblrLeecher.Api
 					break;
 				case "image_permalink":
 					this.ImagePermalink = reader.ReadAsString();
-					break;
-				case "featured_in_tag":
-					this.FeaturedInTag = new List<string>();
-					reader.Read();//startArray
-					while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-					{
-						this.FeaturedInTag.Add(reader.Value.ToString());
-					}
 					break;
 				default:
 					return false;

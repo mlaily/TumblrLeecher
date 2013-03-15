@@ -44,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("russian-criminal-tattoos.tumblr.com", @"D:\russian-criminal-tattoos.tumblr.com\");
+			BackupEverything("prostheticknowledge.tumblr.com", @"D:\prostheticknowledge.tumblr.com\");
 		}
 
 		/// <summary>

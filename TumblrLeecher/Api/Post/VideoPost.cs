@@ -37,6 +37,8 @@ namespace TumblrLeecher.Api
 		/// </summary>
 		public string VideoUrl { get; set; }
 
+		public decimal Duration { get; set; }
+
 		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
 		{
 			switch (currentPropertyName)
@@ -64,6 +66,9 @@ namespace TumblrLeecher.Api
 					break;
 				case "video_url":
 					this.VideoUrl = reader.ReadAsString();
+					break;
+				case "duration":
+					this.Duration = reader.ReadAsDecimal().Value;
 					break;
 				default:
 					return false;

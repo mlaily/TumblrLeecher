@@ -49,7 +49,8 @@ namespace TumblrLeecher.Api
 					this.Player = reader.ReadAsString();
 					break;
 				case "plays":
-					this.Plays = reader.ReadAsInt32().Value;
+					int? value;
+					this.Plays = (value = reader.ReadAsInt32()) == null ? 0 : value.Value;
 					break;
 				case "album_art":
 					this.AlbumArt = reader.ReadAsString();

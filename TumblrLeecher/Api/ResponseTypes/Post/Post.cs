@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace TumblrLeecher.Api
 {
-	public abstract class Post : ITumblrParsable
+	public abstract class Post 
 	{
 		/// <summary>
 		/// The post's unique ID

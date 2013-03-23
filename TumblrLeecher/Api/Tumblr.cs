@@ -41,7 +41,7 @@ namespace TumblrLeecher.Api
 			return request;
 		}
 
-		private Response<T> DoRequest<T>(string url) where T : ITumblrParsable, new()
+		private Response<T> DoRequest<T>(string url)
 		{
 			var request = CreateHttpRequest(HttpMethod.GET, url);
 			string responseBody;

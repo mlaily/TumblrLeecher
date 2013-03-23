@@ -95,7 +95,7 @@ namespace TumblrLeecher.Api
 		}
 	}
 
-	public class Player : ITumblrParsable
+	public class Player 
 	{
 		/// <summary>
 		/// width of video player, in pixels

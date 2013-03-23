@@ -18,11 +18,7 @@ namespace TumblrLeecher.Api.Converters
 			Type genericDefinition = objectType.GetGenericTypeDefinition();
 			if (genericDefinition != null && typeof(Response<>).IsAssignableFrom(genericDefinition))
 			{
-				var genericArguments = objectType.GetGenericArguments();
-				if (genericArguments != null && genericArguments.Length == 1 && typeof(ITumblrParsable).IsAssignableFrom(genericArguments[0]))
-				{
-					return true;
-				}
+				return GetGenericArgument(genericDefinition) != null;
 			}
 			return false;
 		}
@@ -59,7 +55,7 @@ namespace TumblrLeecher.Api.Converters
 			}
 		}
 
-		private Response<T> ParseResponse<T>(JObject jObject, JsonSerializer serializer) where T : ITumblrParsable
+		private Response<T> ParseResponse<T>(JObject jObject, JsonSerializer serializer)
 		{
 			var result = new Response<T>();
 			var meta = jObject["meta"];

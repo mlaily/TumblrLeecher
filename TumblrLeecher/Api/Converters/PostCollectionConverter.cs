@@ -17,19 +17,29 @@ namespace TumblrLeecher.Api.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			JObject jObject = JObject.Load(reader);
-			var result = Build(jObject);
+			var result = Build(jObject, serializer);
 			return result;
 		}
 
-		private Post Build(JObject jObject)
+		private PostCollection Build(JObject jObject, JsonSerializer serializer)
 		{
-			var property = jObject["property"];
+			PostCollection result = new PostCollection();
+			var posts = jObject["posts"];
 			JToken current;
-			//if ((current = property["name"]) != null)
-			//{
-			//    node.Name = (string)current;
-			//}
-			return null;
+
+			if ((current = posts["total_posts"]) != null)
+			{
+				result.TotalPosts = (long)current;
+			}
+			if ((current = posts["blog"]) != null)
+			{
+				result.Blog = serializer.Deserialize<BlogInfo>(jObject.CreateReader());
+			}
+			if ((current = posts["posts"]) != null)
+			{
+				var newPost = serializer.Deserialize<Post>(jObject.CreateReader());
+			}
+			return result;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

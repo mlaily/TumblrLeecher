@@ -12,7 +12,7 @@ namespace TumblrLeecher.Api
 	/// include the two meta properties.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class Response<T> where T : ITumblrParsable
+	public class Response<T>
 	{
 		public long MetaStatus { get; internal set; }
 		public string MetaMessage { get; internal set; }

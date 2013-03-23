@@ -50,7 +50,7 @@ namespace TumblrLeecher.Api
 		}
 	}
 
-	public class Dialogue : ITumblrParsable
+	public class Dialogue 
 	{
 		public string Name { get; protected set; }
 		public string Label { get; protected set; }

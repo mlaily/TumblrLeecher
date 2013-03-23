@@ -87,7 +87,7 @@ namespace TumblrLeecher.Api
 		}
 	}
 
-	public class Photo : ITumblrParsable
+	public class Photo 
 	{
 		/// <summary>
 		/// user supplied caption for the individual photo (Photosets only)
@@ -144,7 +144,7 @@ namespace TumblrLeecher.Api
 		}
 	}
 
-	public class PhotoSize : ITumblrParsable
+	public class PhotoSize
 	{
 		public int Width { get; protected set; }
 		public int Height { get; protected set; }

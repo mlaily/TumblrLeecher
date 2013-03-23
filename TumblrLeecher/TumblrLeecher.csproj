@@ -53,7 +53,6 @@
     <Compile Include="Api\ResponseTypes\BlogInfo.cs" />
     <Compile Include="Api\Converters\ResponseConverter.cs" />
     <Compile Include="Api\Converters\PostConverter.cs" />
-    <Compile Include="Api\ITumblrParsable.cs" />
     <Compile Include="Api\ResponseTypes\Post\AnswerPost.cs" />
     <Compile Include="Api\ResponseTypes\Post\AudioPost.cs" />
     <Compile Include="Api\ResponseTypes\Post\ChatPost.cs" />

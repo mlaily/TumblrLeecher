@@ -11,41 +11,41 @@ namespace TumblrLeecher.Api
 		/// <summary>
 		/// The post's unique ID
 		/// </summary>
-		public long Id { get; protected set; }
-		public string PostUrl { get; protected set; }
-		public string Slug { get; protected set; }
-		public Types Type { get; protected set; }
+		public long Id { get; internal set; }
+		public string PostUrl { get; internal set; }
+		public string Slug { get; internal set; }
+		public PostType Type { get; internal set; }
 		/// <summary>
 		/// The GMT date and time of the post, as a string
 		/// </summary>
-		public string Date { get; protected set; }
-		public DateTime Timestamp { get; protected set; }
-		public Formats Format { get; protected set; }
-		public string ReblogKey { get; protected set; }
-		public List<string> Tags { get; protected set; }
-		public List<string> Highlighted { get; protected set; }
-		public List<string> FeaturedInTag { get; protected set; }
-		public int NoteCount { get; protected set; }
+		public string Date { get; internal set; }
+		public DateTime Timestamp { get; internal set; }
+		public PostFormat Format { get; internal set; }
+		public string ReblogKey { get; internal set; }
+		public List<string> Tags { get; internal set; }
+		public List<string> Highlighted { get; internal set; }
+		public List<string> FeaturedInTag { get; internal set; }
+		public int NoteCount { get; internal set; }
 		/// <summary>
 		/// The URL for the source of the content (for quotes, reblogs, etc.)
 		/// </summary>
-		public string SourceUrl { get; protected set; }
+		public string SourceUrl { get; internal set; }
 		/// <summary>
 		/// The title of the source site
 		/// </summary>
-		public string SourceTitle { get; protected set; }
+		public string SourceTitle { get; internal set; }
 		/// <summary>
 		/// Indicates whether the post was created via mobile/email publishing
 		/// </summary>
-		public bool Mobile { get; protected set; }
+		public bool Mobile { get; internal set; }
 		/// <summary>
 		/// Indicates whether the post was created via the Tumblr bookmarklet
 		/// </summary>
-		public bool Bookmarklet { get; protected set; }
+		public bool Bookmarklet { get; internal set; }
 
-		public States State { get; protected set; }
+		public PostState State { get; internal set; }
 
-		public string ShortUrl { get; protected set; }
+		public string ShortUrl { get; internal set; }
 
 		/// <summary>
 		/// when implemented, should switch on the currentPropertyName and read and initialize own properties accordingly.
@@ -69,7 +69,7 @@ namespace TumblrLeecher.Api
 						this.Date = reader.ReadAsString();
 						break;
 					case "format":
-						this.Format = (Formats)Enum.Parse(typeof(Formats), reader.ReadAsString(), true);
+						this.Format = (PostFormat)Enum.Parse(typeof(PostFormat), reader.ReadAsString(), true);
 						break;
 					case "reblog_key":
 						this.ReblogKey = reader.ReadAsString();
@@ -114,7 +114,7 @@ namespace TumblrLeecher.Api
 						this.NoteCount = reader.ReadAsInt32().Value;
 						break;
 					case "state":
-						this.State = (States)Enum.Parse(typeof(States), reader.ReadAsString(), true);
+						this.State = (PostState)Enum.Parse(typeof(PostState), reader.ReadAsString(), true);
 						break;
 					case "short_url":
 						this.ShortUrl = reader.ReadAsString();
@@ -158,31 +158,31 @@ namespace TumblrLeecher.Api
 						postDatas.Add(reader.Value.ToString(), reader.ReadAsString());
 						break;
 					case "type":
-						Types type = (Types)Enum.Parse(typeof(Types), reader.ReadAsString(), true);
+						PostType type = (PostType)Enum.Parse(typeof(PostType), reader.ReadAsString(), true);
 						switch (type)
 						{
-							case Types.Text:
+							case PostType.Text:
 								newPost = new TextPost();
 								break;
-							case Types.Quote:
+							case PostType.Quote:
 								newPost = new QuotePost();
 								break;
-							case Types.Link:
+							case PostType.Link:
 								newPost = new LinkPost();
 								break;
-							case Types.Answer:
+							case PostType.Answer:
 								newPost = new AnswerPost();
 								break;
-							case Types.Video:
+							case PostType.Video:
 								newPost = new VideoPost();
 								break;
-							case Types.Audio:
+							case PostType.Audio:
 								newPost = new AudioPost();
 								break;
-							case Types.Photo:
+							case PostType.Photo:
 								newPost = new PhotoPost();
 								break;
-							case Types.Chat:
+							case PostType.Chat:
 								newPost = new ChatPost();
 								break;
 							default:
@@ -222,31 +222,32 @@ namespace TumblrLeecher.Api
 			return true;
 		}
 
-		public enum Types
-		{
-			None,
-			Text,
-			Quote,
-			Link,
-			Answer,
-			Video,
-			Audio,
-			Photo,
-			Chat,
-		}
+	}
 
-		public enum Formats
-		{
-			Html,
-			Markdown,
-		}
+	public enum PostType
+	{
+		None,
+		Text,
+		Quote,
+		Link,
+		Answer,
+		Video,
+		Audio,
+		Photo,
+		Chat,
+	}
 
-		public enum States
-		{
-			Published,
-			Queued,
-			Draft,
-			Private,
-		}
+	public enum PostFormat
+	{
+		Html,
+		Markdown,
+	}
+
+	public enum PostState
+	{
+		Published,
+		Queued,
+		Draft,
+		Private,
 	}
 }

@@ -90,7 +90,7 @@ namespace TumblrLeecher.Api
 		/// The type of post to return. Specify one of the following:  text, quote, link, answer, video, audio, photo, chat.
 		/// default to none i.e all posts.
 		/// </param>
-		public Response<PostCollection> RequestPosts(Post.Types type = Post.Types.None, int offset = 0, int limit = 20, long? id = null, string tag = null, Filter filter = Filter.Raw, bool reblogInfo = false, bool notesInfo = false)
+		public Response<PostCollection> RequestPosts(PostType type = PostType.None, int offset = 0, int limit = 20, long? id = null, string tag = null, Filter filter = Filter.Raw, bool reblogInfo = false, bool notesInfo = false)
 		{
 			StringBuilder queryParameters = new StringBuilder();
 			if (offset != 0)
@@ -120,7 +120,7 @@ namespace TumblrLeecher.Api
 			queryParameters.AppendFormat("&filter={0}", filter.ToString().ToLowerInvariant());
 			string url = string.Format("{0}/posts{1}?api_key={2}{3}",
 				FormatRequestUrl(RequestType.Blog),
-				(type == Post.Types.None ? "" : "/" + type.ToString().ToLowerInvariant()),
+				(type == PostType.None ? "" : "/" + type.ToString().ToLowerInvariant()),
 				this.ApiKey,
 				queryParameters.ToString());
 

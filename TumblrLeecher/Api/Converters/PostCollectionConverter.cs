@@ -24,21 +24,25 @@ namespace TumblrLeecher.Api.Converters
 		private PostCollection Build(JObject jObject, JsonSerializer serializer)
 		{
 			PostCollection result = new PostCollection();
-			var posts = jObject["posts"];
-			JToken current;
 
-			if ((current = posts["total_posts"]) != null)
+			JToken current;
+			if ((current = jObject["total_posts"]) != null)
 			{
 				result.TotalPosts = (long)current;
 			}
-			if ((current = posts["blog"]) != null)
+			if ((current = jObject["blog"]) != null)
 			{
 				result.Blog = serializer.Deserialize<BlogInfo>(jObject.CreateReader());
 			}
-			if ((current = posts["posts"]) != null)
+			if ((current = jObject["posts"]) != null)
 			{
-				var newPost = serializer.Deserialize<Post>(jObject.CreateReader());
+				var posts = serializer.Deserialize<List<Post>>(current.CreateReader());
+				foreach (var item in posts)
+				{
+					result.Add(item);
+				}
 			}
+
 			return result;
 		}
 

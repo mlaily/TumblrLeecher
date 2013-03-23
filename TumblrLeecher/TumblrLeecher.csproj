@@ -50,9 +50,10 @@
     <Compile Include="Api\Avatar.cs" />
     <Compile Include="Api\Converters\PostCollectionConverter.cs" />
     <Compile Include="Api\Converters\BlogInfoConverter.cs" />
+    <Compile Include="Api\Converters\Post\AnswerPost.cs" />
     <Compile Include="Api\ResponseTypes\BlogInfo.cs" />
     <Compile Include="Api\Converters\ResponseConverter.cs" />
-    <Compile Include="Api\Converters\PostConverter.cs" />
+    <Compile Include="Api\Converters\Post\PostConverter.cs" />
     <Compile Include="Api\ResponseTypes\Post\AnswerPost.cs" />
     <Compile Include="Api\ResponseTypes\Post\AudioPost.cs" />
     <Compile Include="Api\ResponseTypes\Post\ChatPost.cs" />

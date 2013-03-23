@@ -15,7 +15,7 @@ namespace TumblrLeecher
 		{
 			Api.Tumblr tumblr = new Api.Tumblr("YF3YTs6bdFhM3MjlkNav3iu2atUtpaGLaglZ01T0bZvP0BfMEs", "nerdasaurusrex.tumblr.com");
 
-			var x = tumblr.RequestBlogInfos();
+			var x = tumblr.RequestPosts();
 
 			//Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "mrdiv.tumblr.com");
 
@@ -174,12 +174,12 @@ namespace TumblrLeecher
 			do
 			{
 				//backup all the things!
-				var response = tumblr.RequestPosts(Api.Post.Types.None, offset, PAGE_SIZE, null, null, Api.Tumblr.Filter.Raw, true, true);
+				var response = tumblr.RequestPosts(Api.PostType.None, offset, PAGE_SIZE, null, null, Api.Tumblr.Filter.Raw, true, true);
 				rawPostCollections.Add(response.Content);
 				offset += PAGE_SIZE;
 			} while (offset < total);
 
-			var dummy = tumblr.RequestPosts(Api.Post.Types.None, 0, 0);//ask 0 but return 20
+			var dummy = tumblr.RequestPosts(Api.PostType.None, 0, 0);//ask 0 but return 20
 			Api.PostCollection all = dummy.Content;
 			all.Clear();//this api sucks
 			foreach (var item in (from postCollection in rawPostCollections from post in postCollection select post))
@@ -195,17 +195,17 @@ namespace TumblrLeecher
 				{
 					default:
 						throw new NotImplementedException();
-					case TumblrLeecher.Api.Post.Types.Text:
-					case TumblrLeecher.Api.Post.Types.Quote:
-					case TumblrLeecher.Api.Post.Types.Link:
-					case TumblrLeecher.Api.Post.Types.Answer:
-					case TumblrLeecher.Api.Post.Types.Chat:
+					case TumblrLeecher.Api.PostType.Text:
+					case TumblrLeecher.Api.PostType.Quote:
+					case TumblrLeecher.Api.PostType.Link:
+					case TumblrLeecher.Api.PostType.Answer:
+					case TumblrLeecher.Api.PostType.Chat:
 					//nothing to download
-					case TumblrLeecher.Api.Post.Types.Audio:
+					case TumblrLeecher.Api.PostType.Audio:
 						//todo: parse player and download music?
 						allDynamic.Add(CloneObject(post));
 						break;
-					case TumblrLeecher.Api.Post.Types.Video:
+					case TumblrLeecher.Api.PostType.Video:
 						var videoPost = post as Api.VideoPost;
 						dynamic videoPostDynamic = CloneObject(videoPost);
 						if (videoPost.ThumbnailUrl != null)
@@ -216,7 +216,7 @@ namespace TumblrLeecher
 						allDynamic.Add(videoPostDynamic);
 						//todo: download actual video?
 						break;
-					case TumblrLeecher.Api.Post.Types.Photo:
+					case TumblrLeecher.Api.PostType.Photo:
 						var photoPost = post as Api.PhotoPost;
 						dynamic photoPostDynamic = CloneObject(photoPost);
 						photoPostDynamic.Photos = new List<dynamic>();

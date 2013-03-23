@@ -168,7 +168,7 @@ namespace TumblrLeecher
 			Api.Tumblr tumblr = new Api.Tumblr("YF3YTs6bdFhM3MjlkNav3iu2atUtpaGLaglZ01T0bZvP0BfMEs", blogHostName);
 
 			int offset = 0;
-			int total = tumblr.RequestBlogInfos().Content.Posts;//one extra request doesn't hurt...
+			long total = tumblr.RequestBlogInfos().Content.Posts;//one extra request doesn't hurt...
 			List<Api.PostCollection> rawPostCollections = new List<Api.PostCollection>();
 			const int PAGE_SIZE = 20;//max
 			do

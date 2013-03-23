@@ -44,10 +44,28 @@ namespace TumblrLeecher.Api.Converters
 		{
 			JObject jObject = JObject.Load(reader);
 
-			Response<ITumblrParsable> result = new Response<ITumblrParsable>();
+			Type responseType = GetGenericArgument(objectType);
+			if (typeof(PostCollection) == responseType)
+			{
+				return ParseResponse<PostCollection>(jObject, serializer);
+			}
+			else if (typeof(BlogInfo) == responseType)
+			{
+				return ParseResponse<BlogInfo>(jObject, serializer);
+			}
+			else
+			{
+				throw new NotImplementedException("There is no converter for the requested response.");
+			}
+		}
+
+		private Response<T> ParseResponse<T>(JObject jObject, JsonSerializer serializer) where T : ITumblrParsable
+		{
+			var result = new Response<T>();
 			var meta = jObject["meta"];
 			var response = jObject["response"];
 			JToken current;
+
 			if ((current = meta["status"]) != null)
 			{
 				result.MetaStatus = (long)current;
@@ -56,20 +74,7 @@ namespace TumblrLeecher.Api.Converters
 			{
 				result.MetaMessage = (string)current;
 			}
-
-			Type responseType = GetGenericArgument(objectType);
-			if (typeof(PostCollection) == responseType)
-			{
-				result.Content = serializer.Deserialize<PostCollection>(response.CreateReader());
-			}
-			else if (typeof(BlogInfo) == responseType)
-			{
-				result.Content = serializer.Deserialize<BlogInfo>(response.CreateReader());
-			}
-			else
-			{
-				throw new NotImplementedException("There is no converter for the requested response.");
-			}
+			result.Content = serializer.Deserialize<T>(response.CreateReader());
 
 			return result;
 		}

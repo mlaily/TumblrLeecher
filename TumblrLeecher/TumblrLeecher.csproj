@@ -50,7 +50,7 @@
     <Compile Include="Api\Avatar.cs" />
     <Compile Include="Api\Converters\PostCollectionConverter.cs" />
     <Compile Include="Api\Converters\BlogInfoConverter.cs" />
-    <Compile Include="Api\ResponseTypes\Blog.cs" />
+    <Compile Include="Api\ResponseTypes\BlogInfo.cs" />
     <Compile Include="Api\Converters\ResponseConverter.cs" />
     <Compile Include="Api\Converters\PostConverter.cs" />
     <Compile Include="Api\ITumblrParsable.cs" />

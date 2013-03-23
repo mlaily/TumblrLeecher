@@ -10,9 +10,9 @@ namespace TumblrLeecher.Api
 	internal static class Utility
 	{
 		private static readonly DateTime EPOCH = new DateTime(1970, 1, 1);
-		internal static DateTime TimestampToDateTime(int timestamp)
+		internal static DateTime TimestampToDateTime(long timestamp)
 		{
-			return EPOCH + new TimeSpan(0, 0, timestamp);
+			return EPOCH.AddSeconds(timestamp);
 		}
 
 		internal static HttpWebResponse TryGetResponse(HttpWebRequest request, out string responseBody)

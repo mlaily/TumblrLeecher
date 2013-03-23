@@ -21,15 +21,54 @@ namespace TumblrLeecher.Api.Converters
 			return result;
 		}
 
-		private Post Build(JObject jObject)
+		private BlogInfo Build(JObject jObject)
 		{
-			var property = jObject["property"];
+			BlogInfo result = new BlogInfo();
+			var blog = jObject["blog"];
 			JToken current;
-			//if ((current = property["name"]) != null)
-			//{
-			//    node.Name = (string)current;
-			//}
-			return null;
+
+			if ((current = blog["title"]) != null)
+			{
+				result.Title = (string)current;
+			}
+			if ((current = blog["posts"]) != null)
+			{
+				result.Posts = (long)current;
+			}
+			if ((current = blog["name"]) != null)
+			{
+				result.Name = (string)current;
+			}
+			if ((current = blog["url"]) != null)
+			{
+				result.Url = (string)current;
+			}
+			if ((current = blog["updated"]) != null)
+			{
+				result.Updated = Utility.TimestampToDateTime((long)current);
+			}
+			if ((current = blog["description"]) != null)
+			{
+				result.Description = (string)current;
+			}
+			if ((current = blog["ask"]) != null)
+			{
+				result.Ask = (bool)current;
+			}
+			if ((current = blog["ask_anon"]) != null)
+			{
+				result.AskAnon = (bool)current;
+			}
+			if ((current = blog["likes"]) != null)
+			{
+				result.Likes = (long)current;
+			}
+			if ((current = blog["share_likes"]) != null)
+			{
+				result.ShareLikes = (bool)current;
+			}
+
+			return result;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

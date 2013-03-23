@@ -13,6 +13,10 @@ namespace TumblrLeecher
 	{
 		static void Main(string[] args)
 		{
+			Api.Tumblr tumblr = new Api.Tumblr("YF3YTs6bdFhM3MjlkNav3iu2atUtpaGLaglZ01T0bZvP0BfMEs", "nerdasaurusrex.tumblr.com");
+
+			var x = tumblr.RequestBlogInfos();
+
 			//Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "mrdiv.tumblr.com");
 
 
@@ -44,7 +48,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("prostheticknowledge.tumblr.com", @"D:\prostheticknowledge.tumblr.com\");
+			BackupEverything("apolloniasaintclair.tumblr.com", @"D:\apolloniasaintclair.tumblr.com\");
 		}
 
 		/// <summary>
@@ -170,7 +174,7 @@ namespace TumblrLeecher
 			do
 			{
 				//backup all the things!
-				var response = tumblr.RequestPosts(Api.Post.Types.None, offset, PAGE_SIZE, null, null, Api.Tumblr.Filters.Raw, true, true);
+				var response = tumblr.RequestPosts(Api.Post.Types.None, offset, PAGE_SIZE, null, null, Api.Tumblr.Filter.Raw, true, true);
 				rawPostCollections.Add(response.Content);
 				offset += PAGE_SIZE;
 			} while (offset < total);

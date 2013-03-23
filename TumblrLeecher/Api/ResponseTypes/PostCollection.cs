@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace TumblrLeecher.Api
 {
 	/// <summary>
 	/// represent the datas received in the json response (blog + post array)
 	/// </summary>
-	public class PostCollection : System.Collections.ObjectModel.Collection<Post>, ITumblrParsable
+	public class PostCollection : Collection<Post>, ITumblrParsable
 	{
 		public BlogInfo Blog { get; protected set; }
 		/// <summary>

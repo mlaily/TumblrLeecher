@@ -48,18 +48,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Avatar.cs" />
-    <Compile Include="Api\Blog.cs" />
+    <Compile Include="Api\Converters\PostCollectionConverter.cs" />
+    <Compile Include="Api\Converters\BlogInfoConverter.cs" />
+    <Compile Include="Api\ResponseTypes\Blog.cs" />
+    <Compile Include="Api\Converters\ResponseConverter.cs" />
+    <Compile Include="Api\Converters\PostConverter.cs" />
     <Compile Include="Api\ITumblrParsable.cs" />
-    <Compile Include="Api\Post\AnswerPost.cs" />
-    <Compile Include="Api\Post\AudioPost.cs" />
-    <Compile Include="Api\Post\ChatPost.cs" />
-    <Compile Include="Api\Post\LinkPost.cs" />
-    <Compile Include="Api\Post\PhotoPost.cs" />
-    <Compile Include="Api\Post\Post.cs" />
-    <Compile Include="Api\PostCollection.cs" />
-    <Compile Include="Api\Post\QuotePost.cs" />
-    <Compile Include="Api\Post\TextPost.cs" />
-    <Compile Include="Api\Post\VideoPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\AnswerPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\AudioPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\ChatPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\LinkPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\PhotoPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\Post.cs" />
+    <Compile Include="Api\ResponseTypes\PostCollection.cs" />
+    <Compile Include="Api\ResponseTypes\Post\QuotePost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\TextPost.cs" />
+    <Compile Include="Api\ResponseTypes\Post\VideoPost.cs" />
     <Compile Include="Api\Response.cs" />
     <Compile Include="Api\Tumblr.cs" />
     <Compile Include="Api\Utility.cs" />

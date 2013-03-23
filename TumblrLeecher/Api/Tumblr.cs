@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net;
+using TumblrLeecher.Api.Converters;
 
 namespace TumblrLeecher.Api
 {
@@ -12,6 +13,14 @@ namespace TumblrLeecher.Api
 		private const string COMMON_URL_BASE = "http://api.tumblr.com/v2";
 		public string ApiKey { get; set; }
 		public string BlogHostName { get; set; }
+
+		private static readonly JsonConverter[] _converters = new JsonConverter[]
+		{
+			new ResponseConverter(),
+			new BlogInfoConverter(),
+			new PostCollectionConverter(),
+			new PostConverter(),
+		};
 
 		private Tumblr(string apiKey)
 		{
@@ -24,33 +33,45 @@ namespace TumblrLeecher.Api
 			this.BlogHostName = blogHostName;
 		}
 
+		private HttpWebRequest CreateHttpRequest(HttpMethod httpMethod, string uri)
+		{
+			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+			request.Method = Enum.GetName(typeof(HttpMethod), httpMethod);
+			request.ServicePoint.Expect100Continue = false;
+			return request;
+		}
+
 		private Response<T> DoRequest<T>(string url) where T : ITumblrParsable, new()
 		{
-			var request = System.Net.HttpWebRequest.Create(url);
-			var response = request.GetResponse();
-			Response<T> result = new Response<T>(response.GetResponseStream());
+			var request = CreateHttpRequest(HttpMethod.GET, url);
+			string responseBody;
+			var response = Utility.TryGetResponse(request, out responseBody);
+
+			var result = JsonConvert.DeserializeObject<Response<T>>(responseBody, _converters);
+
 			return result;
 		}
 
-		private enum RequestTypes
-		{
-			Blog,
-			User,
-		}
-		private string FormatRequestUrl(RequestTypes type)
+		private string FormatRequestUrl(RequestType type)
 		{
 			switch (type)
 			{
-				case RequestTypes.Blog:
+				case RequestType.Blog:
 					return string.Format("{0}/blog/{1}", COMMON_URL_BASE, this.BlogHostName);
-				case RequestTypes.User:
+				case RequestType.User:
 					return string.Format("{0}/user/{1}", COMMON_URL_BASE, this.BlogHostName);
 				default:
 					throw new NotImplementedException();
 			}
 		}
 
-		public enum Filters
+		private enum RequestType
+		{
+			Blog,
+			User,
+		}
+
+		public enum Filter
 		{
 			/// <summary>
 			/// Plain text, no HTML
@@ -69,7 +90,7 @@ namespace TumblrLeecher.Api
 		/// The type of post to return. Specify one of the following:  text, quote, link, answer, video, audio, photo, chat.
 		/// default to none i.e all posts.
 		/// </param>
-		public Response<PostCollection> RequestPosts(Post.Types type = Post.Types.None, int offset = 0, int limit = 20, long? id = null, string tag = null, Filters filter = Filters.Raw, bool reblogInfo = false, bool notesInfo = false)
+		public Response<PostCollection> RequestPosts(Post.Types type = Post.Types.None, int offset = 0, int limit = 20, long? id = null, string tag = null, Filter filter = Filter.Raw, bool reblogInfo = false, bool notesInfo = false)
 		{
 			StringBuilder queryParameters = new StringBuilder();
 			if (offset != 0)
@@ -98,7 +119,7 @@ namespace TumblrLeecher.Api
 			}
 			queryParameters.AppendFormat("&filter={0}", filter.ToString().ToLowerInvariant());
 			string url = string.Format("{0}/posts{1}?api_key={2}{3}",
-				FormatRequestUrl(RequestTypes.Blog),
+				FormatRequestUrl(RequestType.Blog),
 				(type == Post.Types.None ? "" : "/" + type.ToString().ToLowerInvariant()),
 				this.ApiKey,
 				queryParameters.ToString());
@@ -110,7 +131,7 @@ namespace TumblrLeecher.Api
 		public Response<BlogInfo> RequestBlogInfos()
 		{
 			string url = string.Format("{0}/info?api_key={1}",
-				FormatRequestUrl(RequestTypes.Blog),
+				FormatRequestUrl(RequestType.Blog),
 				this.ApiKey);
 
 			return DoRequest<BlogInfo>(url);
@@ -125,16 +146,23 @@ namespace TumblrLeecher.Api
 		{
 			if (!new int[] { 16, 24, 30, 40, 48, 64, 96, 128, 512 }.Contains(size))
 			{
-				throw new ArgumentException("out of range size. (16, 24, 30, 40, 48, 64, 96, 128, 512)");
+				throw new ArgumentException("size is out of range. accepted values: (16, 24, 30, 40, 48, 64, 96, 128, 512)");
 			}
 
 			string url = string.Format("{0}/avatar{1}",
-				FormatRequestUrl(RequestTypes.Blog),
+				FormatRequestUrl(RequestType.Blog),
 				(size == 64 ? "" : "/" + size.ToString()));
 
-			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+			HttpWebRequest request = CreateHttpRequest(HttpMethod.GET, url);
 			var response = request.GetResponse();
 			return new Avatar(response);
 		}
 	}
+
+	internal enum HttpMethod
+	{
+		GET,
+		POST,
+	}
+
 }

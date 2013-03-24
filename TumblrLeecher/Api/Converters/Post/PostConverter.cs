@@ -60,6 +60,7 @@ namespace TumblrLeecher.Api.Converters
 					default:
 						throw new NotImplementedException("unexpected post type.");
 				}
+				newPost.Type = postType;
 			}
 			else
 			{

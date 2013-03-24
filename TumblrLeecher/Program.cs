@@ -13,10 +13,6 @@ namespace TumblrLeecher
 	{
 		static void Main(string[] args)
 		{
-			Api.Tumblr tumblr = new Api.Tumblr("YF3YTs6bdFhM3MjlkNav3iu2atUtpaGLaglZ01T0bZvP0BfMEs", "nerdasaurusrex.tumblr.com");
-
-			var x = tumblr.RequestPosts();
-
 			//Api.Tumblr tumblr = new Api.Tumblr("PyezS3Q4Smivb24d9SzZGYSuhMNPQUhMsVetMC9ksuGPkK1BTt", "mrdiv.tumblr.com");
 
 
@@ -48,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("apolloniasaintclair.tumblr.com", @"D:\apolloniasaintclair.tumblr.com\");
+			BackupEverything("nerdasaurusrex.tumblr.com", @"D:\nerdasaurusrex.tumblr.com\");
 		}
 
 		/// <summary>

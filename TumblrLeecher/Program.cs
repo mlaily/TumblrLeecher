@@ -44,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("nerdasaurusrex.tumblr.com", @"D:\nerdasaurusrex.tumblr.com\");
+			BackupEverything("yaurthekapitesting.tumblr.com", @"D:\yaurthekapitesting.tumblr.com\");
 		}
 
 		/// <summary>

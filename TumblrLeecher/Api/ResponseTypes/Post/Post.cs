@@ -46,39 +46,6 @@ namespace TumblrLeecher.Api
 		public PostState State { get; internal set; }
 
 		public string ShortUrl { get; internal set; }
-
-		/// <summary>
-		/// when implemented, should switch on the currentPropertyName and read and initialize own properties accordingly.
-		/// should return true if datas have been read, false otherwise.
-		/// </summary>
-		/// <param name="currentPropertyName"></param>
-		/// <param name="reader"></param>
-		/// <returns></returns>
-		protected abstract bool LocalSwitch(string currentPropertyName, JsonReader reader);
-
-		public bool Parse(JsonReader reader)
-		{
-			while (reader.Read() && reader.TokenType != JsonToken.EndObject)
-			{
-				switch (reader.Value.ToString())
-				{
-					
-				
-					default:
-						//call the implementation from derived class
-						string value = reader.Value.ToString();
-						bool result = LocalSwitch(value, reader);
-						if (!result)
-						{
-							throw new Exception(string.Format("unexpected value \"{0}\"", value));
-						}
-						break;
-				}
-			}
-
-			return true;
-		}
-
 	}
 
 	public enum PostType

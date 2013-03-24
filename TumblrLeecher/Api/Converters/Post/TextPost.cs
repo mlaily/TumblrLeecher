@@ -9,13 +9,17 @@ namespace TumblrLeecher.Api.Converters
 	internal partial class PostConverter
 	{
 
-		private AnswerPost ParseTextPost(JObject jObject, HashSet<string> checkedProperties)
+		private TextPost ParseTextPost(JObject jObject, HashSet<string> checkedProperties)
 		{
-			AnswerPost newPost = new AnswerPost();
+			TextPost newPost = new TextPost();
 			JToken current;
-			if (CheckProperty(jObject, "type", checkedProperties, out current))
+			if (CheckProperty(jObject, "title", checkedProperties, out current))
 			{
-
+				newPost.Title = (string)current;
+			}
+			if (CheckProperty(jObject, "body", checkedProperties, out current))
+			{
+				newPost.Body = (string)current;
 			}
 			return newPost;
 		}

@@ -8,23 +8,7 @@ namespace TumblrLeecher.Api
 {
 	public class TextPost : Post
 	{
-		public string Title { get; protected set; }
-		public string Body { get; protected set; }
-
-		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
-		{
-			switch (currentPropertyName)
-			{
-				case "title":
-					this.Title = reader.ReadAsString();
-					break;
-				case "body":
-					this.Body = reader.ReadAsString();
-					break;
-				default:
-					return false;
-			}
-			return true;
-		}
+		public string Title { get; internal set; }
+		public string Body { get; internal set; }
 	}
 }

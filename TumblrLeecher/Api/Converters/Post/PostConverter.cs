@@ -66,7 +66,7 @@ namespace TumblrLeecher.Api.Converters
 				throw new NotImplementedException("property \"type\" not found in post.");
 			}
 
-			ParseBasePost(jObject, checkedProperties);
+			ParseBasePost(jObject, checkedProperties, newPost);
 
 			//check for unknown properties and throw an exception if any is found.
 			foreach (var property in jObject.Properties())

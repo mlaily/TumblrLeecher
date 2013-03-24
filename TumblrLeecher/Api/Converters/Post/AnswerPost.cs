@@ -13,9 +13,21 @@ namespace TumblrLeecher.Api.Converters
 		{
 			AnswerPost newPost = new AnswerPost();
 			JToken current;
-			if (CheckProperty(jObject, "type", checkedProperties, out current))
+			if (CheckProperty(jObject, "asking_name", checkedProperties, out current))
 			{
-
+				newPost.AskingName = (string)current;
+			}
+			if (CheckProperty(jObject, "asking_url", checkedProperties, out current))
+			{
+				newPost.AskingUrl = (string)current;
+			}
+			if (CheckProperty(jObject, "question", checkedProperties, out current))
+			{
+				newPost.Question = (string)current;
+			}
+			if (CheckProperty(jObject, "answer", checkedProperties, out current))
+			{
+				newPost.Answer = (string)current;
 			}
 			return newPost;
 		}

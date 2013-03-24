@@ -9,125 +9,46 @@ namespace TumblrLeecher.Api
 	public class VideoPost : Post
 	{
 
-		public string Caption { get; protected set; }
-		public List<Player> Player { get; protected set; }
+		public string Caption { get; internal set; }
+		public List<Player> Player { get; internal set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public string PermalinkUrl { get; protected set; }
+		public string PermalinkUrl { get; internal set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public string ThumbnailUrl { get; protected set; }
+		public string ThumbnailUrl { get; internal set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public decimal ThumbnailWidth { get; protected set; }
+		public decimal ThumbnailWidth { get; internal set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public decimal ThumbnailHeight { get; protected set; }
+		public decimal ThumbnailHeight { get; internal set; }
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public bool Html5Capable { get; protected set; }
+		public bool Html5Capable { get; internal set; }
 
 		/// <summary>
 		/// undocumented
 		/// </summary>
-		public string VideoUrl { get; set; }
+		public string VideoUrl { get; internal set; }
 
-		public decimal Duration { get; set; }
-
-		protected override bool LocalSwitch(string currentPropertyName, JsonReader reader)
-		{
-			switch (currentPropertyName)
-			{
-				case "caption":
-					this.Caption = reader.ReadAsString();
-					break;
-				case "player":
-					ParsePlayers(reader);
-					break;
-				case "permalink_url":
-					this.PermalinkUrl = reader.ReadAsString();
-					break;
-				case "thumbnail_url":
-					this.ThumbnailUrl = reader.ReadAsString();
-					break;
-				case "thumbnail_width":
-					this.ThumbnailWidth = reader.ReadAsDecimal().Value;
-					break;
-				case "thumbnail_height":
-					this.ThumbnailHeight = reader.ReadAsDecimal().Value;
-					break;
-				case "html5_capable":
-					this.Html5Capable = bool.Parse(reader.ReadAsString());
-					break;
-				case "video_url":
-					this.VideoUrl = reader.ReadAsString();
-					break;
-				case "duration":
-					this.Duration = reader.ReadAsDecimal().Value;
-					break;
-				default:
-					return false;
-			}
-			return true;
-		}
-
-		private bool ParsePlayers(JsonReader reader)
-		{
-			this.Player = new List<Player>();
-			reader.Read();//startArray
-			bool result = false;
-			do
-			{
-				Player player = new Player();
-				//fail if endArray
-				result = player.Parse(reader);
-				if (result)
-				{
-					this.Player.Add(player);
-				}
-			} while (result);
-			return true;
-		}
+		public decimal Duration { get; internal set; }
 	}
 
-	public class Player 
+	public class Player
 	{
 		/// <summary>
 		/// width of video player, in pixels
 		/// </summary>
-		public int Width { get; protected set; }
+		public long Width { get; internal set; }
 		/// <summary>
 		/// HTML for embedding the video player
 		/// </summary>
-		public string EmbedCode { get; protected set; }
-
-		public bool Parse(JsonReader reader)
-		{
-			reader.Read();//startObject
-			if (reader.TokenType == JsonToken.EndArray)
-			{
-				return false;
-			}
-			while (reader.Read() && reader.TokenType != JsonToken.EndObject)
-			{
-				switch (reader.Value.ToString())
-				{
-					case "width":
-						this.Width = reader.ReadAsInt32().Value;
-						break;
-					case "embed_code":
-						this.EmbedCode = reader.ReadAsString();
-						break;
-					default:
-						throw new Exception("unexpected value");
-				}
-			}
-			return true;
-		}
+		public string EmbedCode { get; internal set; }
 	}
 }

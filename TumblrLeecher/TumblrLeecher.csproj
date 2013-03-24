@@ -51,6 +51,14 @@
     <Compile Include="Api\Converters\PostCollectionConverter.cs" />
     <Compile Include="Api\Converters\BlogInfoConverter.cs" />
     <Compile Include="Api\Converters\Post\AnswerPost.cs" />
+    <Compile Include="Api\Converters\Post\Post.cs" />
+    <Compile Include="Api\Converters\Post\TextPost.cs" />
+    <Compile Include="Api\Converters\Post\QuotePost.cs" />
+    <Compile Include="Api\Converters\Post\LinkPost.cs" />
+    <Compile Include="Api\Converters\Post\VideoPost.cs" />
+    <Compile Include="Api\Converters\Post\AudioPost.cs" />
+    <Compile Include="Api\Converters\Post\PhotoPost.cs" />
+    <Compile Include="Api\Converters\Post\ChatPost.cs" />
     <Compile Include="Api\ResponseTypes\BlogInfo.cs" />
     <Compile Include="Api\Converters\ResponseConverter.cs" />
     <Compile Include="Api\Converters\Post\PostConverter.cs" />

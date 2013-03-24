@@ -34,28 +34,28 @@ namespace TumblrLeecher.Api.Converters
 				switch (postType)
 				{
 					case PostType.Text:
-						newPost = new TextPost();
+						newPost = ParseTextPost(jObject, checkedProperties);
 						break;
 					case PostType.Quote:
-						newPost = new QuotePost();
+						newPost = ParseQuotePost(jObject, checkedProperties);
 						break;
 					case PostType.Link:
-						newPost = new LinkPost();
+						newPost = ParseLinkPost(jObject, checkedProperties);
 						break;
 					case PostType.Answer:
 						newPost = ParseAnswerPost(jObject, checkedProperties);
 						break;
 					case PostType.Video:
-						newPost = new VideoPost();
+						newPost = ParseVideoPost(jObject, checkedProperties);
 						break;
 					case PostType.Audio:
-						newPost = new AudioPost();
+						newPost = ParseAudioPost(jObject, checkedProperties);
 						break;
 					case PostType.Photo:
-						newPost = new PhotoPost();
+						newPost = ParsePhotoPost(jObject, checkedProperties);
 						break;
 					case PostType.Chat:
-						newPost = new ChatPost();
+						newPost = ParseChatPost(jObject, checkedProperties);
 						break;
 					default:
 						throw new NotImplementedException("unexpected post type.");
@@ -66,21 +66,7 @@ namespace TumblrLeecher.Api.Converters
 				throw new NotImplementedException("property \"type\" not found in post.");
 			}
 
-			//parse the properties common to all post types.
-			if (CheckProperty(jObject, "id", checkedProperties, out current))
-			{
-				newPost.Id = (long)current;
-			}
-			if (CheckProperty(jObject, "post_url", checkedProperties, out current))
-			{
-				newPost.PostUrl = (string)current;
-			}
-			if (CheckProperty(jObject, "slug", checkedProperties, out current))
-			{
-				newPost.Slug = (string)current;
-			}
-			//not used.
-			CheckProperty(jObject, "blog_name", checkedProperties, out current);
+			ParseBasePost(jObject, checkedProperties);
 
 			//check for unknown properties and throw an exception if any is found.
 			foreach (var property in jObject.Properties())

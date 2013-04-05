@@ -50,7 +50,7 @@ namespace TumblrLeecher.Api.Converters
 						newDialogue.Phrase = (string)property.Value;
 						break;
 					default:
-						throw new NotImplementedException("unexpected value in a dialogue object.");
+						throw new NotImplementedException("unexpected value in a dialogue object:\n" + property.ToString());
 				}
 			}
 			return newDialogue;

@@ -71,7 +71,7 @@ namespace TumblrLeecher.Api.Converters
 						newPlayer.EmbedCode = (string)property.Value;
 						break;
 					default:
-						throw new NotImplementedException("unexpected value in a player object.");
+						throw new NotImplementedException("unexpected value in a player object:\n" + property.ToString());
 				}
 			}
 			return newPlayer;

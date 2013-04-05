@@ -70,8 +70,11 @@ namespace TumblrLeecher.Api.Converters
 							newPhoto.AltSizes.Add(ParsePhotoSize(child));
 						}
 						break;
+					case "exif":
+						newPhoto.Exif = ParsePhotoExif((JObject)property.Value);
+						break;
 					default:
-						throw new NotImplementedException("unexpected value in a photo object.");
+						throw new NotImplementedException("unexpected value in a photo object:\n" + property.ToString());
 				}
 			}
 			return newPhoto;
@@ -94,10 +97,39 @@ namespace TumblrLeecher.Api.Converters
 						newPhotoSize.Url = (string)property.Value;
 						break;
 					default:
-						throw new NotImplementedException("unexpected value in a photo size object.");
+						throw new NotImplementedException("unexpected value in a photo size object:\n" + property.ToString());
 				}
 			}
 			return newPhotoSize;
+		}
+
+		private PhotoExif ParsePhotoExif(JObject jObject)
+		{
+			PhotoExif newPhotoExif = new PhotoExif();
+			foreach (var property in jObject.Properties())
+			{
+				switch (property.Name)
+				{
+					case "Camera":
+						newPhotoExif.Camera = (string)property.Value;
+						break;
+					case "ISO":
+						newPhotoExif.ISO = (long)property.Value;
+						break;
+					case "Aperture":
+						newPhotoExif.Aperture = (string)property.Value;
+						break;
+					case "Exposure":
+						newPhotoExif.Exposure = (string)property.Value;
+						break;
+					case "FocalLength":
+						newPhotoExif.FocalLength = (string)property.Value;
+						break;
+					default:
+						throw new NotImplementedException("unexpected value in a photo exif object:\n" + property.ToString());
+				}
+			}
+			return newPhotoExif;
 		}
 
 	}

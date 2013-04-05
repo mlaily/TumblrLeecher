@@ -46,6 +46,7 @@ namespace TumblrLeecher.Api
 		public string Caption { get; internal set; }
 		public List<PhotoSize> AltSizes { get; internal set; }
 		public PhotoSize OriginalSize { get; internal set; }
+		public PhotoExif Exif { get; set; }
 	}
 
 	public class PhotoSize
@@ -53,5 +54,14 @@ namespace TumblrLeecher.Api
 		public long Width { get; internal set; }
 		public long Height { get; internal set; }
 		public string Url { get; internal set; }
+	}
+
+	public class PhotoExif
+	{
+		public string Camera { get; set; }
+		public long ISO { get; set; }
+		public string Aperture { get; set; }
+		public string Exposure { get; set; }
+		public string FocalLength { get; set; }
 	}
 }

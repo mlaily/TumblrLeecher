@@ -44,7 +44,7 @@ namespace TumblrLeecher
 			//    }
 			//}
 
-			BackupEverything("yaurthekapitesting.tumblr.com", @"D:\yaurthekapitesting.tumblr.com\");
+			BackupEverything("voiceofnature.tumblr.com", @"D:\voiceofnature.tumblr.com\");
 		}
 
 		/// <summary>

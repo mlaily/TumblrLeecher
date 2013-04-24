@@ -57,6 +57,10 @@ namespace TumblrLeecher.Api.Converters
 			{
 				newPost.Track = (string)current;
 			}
+			if (CheckProperty(jObject, "embed", checkedProperties, out current))
+			{
+				newPost.Embed = (string)current;
+			}
 			return newPost;
 		}
 

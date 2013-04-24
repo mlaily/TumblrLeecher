@@ -37,5 +37,7 @@ namespace TumblrLeecher.Api
 		/// ex: "track":"7 of 11"
 		/// </summary>
 		public string Track { get; internal set; }
+
+		public string Embed { get; internal set; }
 	}
 }
